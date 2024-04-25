@@ -1,0 +1,24 @@
+{
+  "name": "npm-esm-cjs-stats",
+  "version": "0.0.1",
+  "description": "Statsinator",
+  "main": "index.js",
+  "scripts": {
+    "crawl:debug": "tsc && node run.cjs --debug",
+    "crawl:debug:unsafe": "tsc && UNSAFE_OVERWRITE_FILE=true node run.cjs --debug",
+    "crawl:prod": "tsc && node run.cjs"
+  },
+  "keywords": [ ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "npm-high-impact": "^1.6.0",
+    "pacote": "^18.0.2",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/pacote": "^11.1.8"
+  }
+}
