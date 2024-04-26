@@ -1,5 +1,6 @@
 name: "node index cache"
 on:
+  workflow_dispatch: 
   schedule:
     - cron: "7 16 * * *"
 
@@ -27,9 +28,17 @@ jobs:
         run: |
           DATE=$(date '+%Y-%m-%d')
           git checkout -b "crawl-$DATE"
+          git add -A
+          
           echo "DATE=$DATE" >> $GITHUB_ENV
 
-      - name: commit changes
-        uses: elstudio/actions-js-build/commit@v4
+      # - name: commit changes
+      #   uses: elstudio/actions-js-build/commit@v4
+      #   with:
+      #     commitMessage: "Crawled on ${{env.DATE}}"
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        id: auto-commit-action #mandatory for the output to show up in ${{ steps }}
         with:
-          commitMessage: "Crawled on ${{env.DATE}}"
+          push_options: "-u origin crawl-${{env.DATE}}"
+          commit_message: "Crawled on ${{env.DATE}}"
