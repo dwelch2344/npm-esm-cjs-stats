@@ -1,4 +1,4 @@
-name: "node index cache"
+name: "crawl critical npm packages"
 on:
   workflow_dispatch: 
   schedule:
@@ -30,6 +30,7 @@ jobs:
         run: |
           DATE=$(date '+%Y-%m-%d')
           git checkout -b "crawl-$DATE"
+          git remote -v
           # git add -A
           
           echo "DATE=$DATE" >> $GITHUB_ENV
