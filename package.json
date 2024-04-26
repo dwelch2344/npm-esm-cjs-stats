@@ -6,7 +6,8 @@
   "scripts": {
     "crawl:debug": "tsc && node run.cjs --debug",
     "crawl:debug:unsafe": "tsc && UNSAFE_OVERWRITE_FILE=true node run.cjs --debug",
-    "crawl:prod": "tsc && node run.cjs"
+    "crawl:prod": "tsc && node run.cjs",
+    "gha:local": "act --container-architecture=linux/amd64 -P ubuntu-latest=catthehacker/ubuntu:act-latest -s NPMJS_TOKEN=$NPMJS_MY_TOKEN  -W '.github/workflows/crawl.yml' schedule"
   },
   "keywords": [ ],
   "author": "",

@@ -28,11 +28,11 @@ async function main() {
   }
 
 
-  if (!token) {
-    throw new Error(
-      'Expected `NPM_TOKEN` in env, please add a `.env` file with it'
-    )
-  }
+  // if (!token) {
+  //   throw new Error(
+  //     'Expected `NPM_TOKEN` in env, please add a `.env` file with it'
+  //   )
+  // }
 
   let slice = 0
   const size = 20
@@ -127,7 +127,7 @@ async function main() {
   }
 
   await fs.writeFile(destination, JSON.stringify(allResults, undefined, 2) + '\n')
-  console.log('done!', allResults)
+  console.log('done!')
 
 
 
