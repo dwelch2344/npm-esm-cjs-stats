@@ -25,7 +25,7 @@ jobs:
         env:
           NPM_TOKEN: "${{ secrets.NPMJS_TOKEN }}"
         run: |
-          npm run crawl:debug 
+          npm run crawl:prod 
           mkdir -p archive
           cp data/*.json archive
           
