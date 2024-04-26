@@ -23,7 +23,13 @@ jobs:
           ls 
           ls -alh data
 
-      # - name: commit changes
-      #   uses: elstudio/actions-js-build/commit@v4
-      #   with:
-      #     commitMessage: "curl \"https://${{ matrix.kind }}.org/dist/index.tab\" (and .json)"
+      - name: create new branch
+        run: |
+          DATE=$(date '+%Y-%m-%d')
+          git checkout -b "crawl-$DATE"
+          echo "DATE=$DATE" >> $GITHUB_ENV
+
+      - name: commit changes
+        uses: elstudio/actions-js-build/commit@v4
+        with:
+          commitMessage: "Crawled on ${{env.DATE}}"
