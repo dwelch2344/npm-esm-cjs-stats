@@ -28,7 +28,7 @@ jobs:
         run: |
           DATE=$(date '+%Y-%m-%d')
           git checkout -b "crawl-$DATE"
-          git add -A
+          # git add -A
           
           echo "DATE=$DATE" >> $GITHUB_ENV
 
