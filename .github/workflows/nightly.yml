@@ -19,6 +19,8 @@ jobs:
           NPM_TOKEN: "${{ secrets.NPMJS_TOKEN }}"
         run: |
           npm run crawl:debug 
+          mkdir -p archive
+          cp data/*.json archive
       - run: git --no-pager diff && git status
       - run: |
           ls 
