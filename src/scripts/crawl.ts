@@ -28,11 +28,11 @@ async function main() {
   }
 
 
-  if (!token) {
-    throw new Error(
-      'Expected `NPM_TOKEN` in env, please add a `.env` file with it'
-    )
-  }
+  // if (!token) {
+  //   throw new Error(
+  //     'Expected `NPM_TOKEN` in env, please add a `.env` file with it'
+  //   )
+  // }
 
   let slice = 0
   const size = 20
