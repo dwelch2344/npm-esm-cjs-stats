@@ -1,19 +1,11 @@
 name: "node index cache"
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "7 16 * * *"
 
 jobs:
-  cache:
+  crawl:
     runs-on: ubuntu-latest
-    continue-on-error: true
-
-    strategy:
-      fail-fast: false
-      matrix:
-        kind:
-          - nodejs
-          - iojs
 
     steps:
       - uses: actions/checkout@v4
@@ -21,12 +13,15 @@ jobs:
         with:
           node-version: '20'
       - run: npm i
-      - run: npm run crawl:debug 
-      - run: git diff && git status
+      - name: Crawl
+        env:
+          NPM_TOKEN: "${{ secrets.NPMJS_TOKEN }}"
+        run: |
+          npm run crawl:debug 
+      - run: git --no-pager diff && git status
       - run: |
           ls 
-          ls data
-          tree data
+          ls -alh data
 
       # - name: commit changes
       #   uses: elstudio/actions-js-build/commit@v4
