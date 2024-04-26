@@ -21,27 +21,32 @@ jobs:
           npm run crawl:debug 
           mkdir -p archive
           cp data/*.json archive
-      - run: git --no-pager diff && git status
-      - run: |
-          ls 
-          ls -alh data
-
+          
       - name: create new branch
         run: |
           DATE=$(date '+%Y-%m-%d')
           git checkout -b "crawl-$DATE"
-          git remote -v
-          # git add -A
+          
+          git config --global user.name 'Github Actions [dwelch2344]'
+          git config --global user.email 'dwelch2344@users.noreply.github.com'
+          git add -A
+          git commit -m "Crawled on $DATE"
+
           
           echo "DATE=$DATE" >> $GITHUB_ENV
 
+      - name: Push the changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "crawl-${{env.DATE}}"
       # - name: commit changes
       #   uses: elstudio/actions-js-build/commit@v4
       #   with:
       #     commitMessage: "Crawled on ${{env.DATE}}"
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        id: auto-commit-action #mandatory for the output to show up in ${{ steps }}
-        with:
-          push_options: "-u origin crawl-${{env.DATE}}"
-          commit_message: "Crawled on ${{env.DATE}}"
+      # - uses: stefanzweifel/git-auto-commit-action@v5
+      #   id: auto-commit-action #mandatory for the output to show up in ${{ steps }}
+      #   with:
+      #     push_options: "-u origin crawl-${{env.DATE}}"
+      #     commit_message: "Crawled on ${{env.DATE}}"
